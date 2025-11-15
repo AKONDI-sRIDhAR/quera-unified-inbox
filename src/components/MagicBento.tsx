@@ -12,8 +12,6 @@ interface MagicBentoProps {
   enableStars?: boolean;
   enableSpotlight?: boolean;
   enableBorderGlow?: boolean;
-  enableTilt?: boolean;
-  enableMagnetism?: boolean;
   clickEffect?: boolean;
   textAutoHide?: boolean;
   glowColor?: string;
@@ -44,8 +42,6 @@ export const MagicBento = ({
   enableStars = true,
   enableSpotlight = true,
   enableBorderGlow = true,
-  enableTilt = true,
-  enableMagnetism = true,
   clickEffect = true,
   textAutoHide = true,
   glowColor = DEFAULT_GLOW_COLOR,
@@ -149,74 +145,14 @@ export const MagicBento = ({
     const handleMouseEnter = () => {
       isHoveredRef.current = true;
       animateParticles();
-
-      if (enableTilt) {
-        gsap.to(element, {
-          rotateX: 5,
-          rotateY: 5,
-          duration: 0.3,
-          ease: "power2.out",
-          transformPerspective: 1000,
-        });
-      }
     };
 
     const handleMouseLeave = () => {
       isHoveredRef.current = false;
       clearAllParticles();
-
-      if (enableTilt) {
-        gsap.to(element, {
-          rotateX: 0,
-          rotateY: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
-
-      if (enableMagnetism) {
-        gsap.to(element, {
-          x: 0,
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!enableTilt && !enableMagnetism) return;
-
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      if (enableTilt) {
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
-
-        gsap.to(element, {
-          rotateX,
-          rotateY,
-          duration: 0.1,
-          ease: "power2.out",
-          transformPerspective: 1000,
-        });
-      }
-
-      if (enableMagnetism) {
-        const magnetX = (x - centerX) * 0.05;
-        const magnetY = (y - centerY) * 0.05;
-
-        gsap.to(element, {
-          x: magnetX,
-          y: magnetY,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -278,8 +214,6 @@ export const MagicBento = ({
     animateParticles,
     clearAllParticles,
     enableStars,
-    enableTilt,
-    enableMagnetism,
     clickEffect,
     glowColor,
   ]);
@@ -320,7 +254,6 @@ export const MagicBento = ({
       <div className="relative z-20">
         {enableBorderGlow ? (
           <motion.div
-            whileHover={enableTilt ? { rotateX: 1, rotateY: 1 } : undefined}
             className={`rounded-lg ${
               enableBorderGlow
                 ? "shadow-[0_0_20px_rgba(var(--glow-color),0.15)]"
