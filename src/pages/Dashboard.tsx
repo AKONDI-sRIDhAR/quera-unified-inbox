@@ -12,6 +12,7 @@ import { ActiveAssignments } from "@/components/ActiveAssignments";
 import { AssignedQueries } from "@/components/AssignedQueries";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useToast } from "@/hooks/use-toast";
+import Shuffle from "@/components/Shuffle";
 
 const Dashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -65,28 +66,29 @@ const Dashboard = () => {
       textAutoHide={true}
     >
       <div className="min-h-screen bg-background p-4 pb-5">
-        <header className="mb-6 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">
-              Quera
-            </h1>
+        <header className="mb-6 flex flex-col items-center">
+          <div className="text-center">
+            <Shuffle
+              text="Quera"
+              className="text-3xl font-bold tracking-tight text-foreground"
+            />
             <p className="text-sm text-muted-foreground">
               Unified Query Management
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleLogout}
-              className="gap-2"
-            >
-              <LogOut className="h-4 w-4" />
-              Logout
-            </Button>
-          </div>
         </header>
+        <div className="absolute top-4 right-4 flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLogout}
+            className="gap-2"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </Button>
+        </div>
 
         <div className="grid gap-4 md:gap-5 lg:grid-cols-3">
           {/* Top-Left: Inbox (2x1 on large screens) */}
