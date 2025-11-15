@@ -10,6 +10,7 @@ import { QuickStats } from "@/components/QuickStats";
 import { NewQueryForm } from "@/components/NewQueryForm";
 import { ActiveAssignments } from "@/components/ActiveAssignments";
 import { AssignedQueries } from "@/components/AssignedQueries";
+import { SolvedAssignments } from "@/components/SolvedAssignments";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useToast } from "@/hooks/use-toast";
 
@@ -59,7 +60,7 @@ const Dashboard = () => {
       spotlightRadius={300}
       enableBorderGlow={true}
       glowColor="132, 0, 255"
-      enableMagnetism={true}
+      enableMagnetism={false}
       clickEffect={true}
       textAutoHide={true}
     >
@@ -97,6 +98,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             <QuickStats />
             <AssignedQueries />
+            <SolvedAssignments />
           </div>
 
           {/* Middle-Left: New Query Form (1x2 on large) */}
