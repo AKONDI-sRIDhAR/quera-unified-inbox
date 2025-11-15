@@ -1,0 +1,39 @@
+:root {
+  --purple-primary: rgba(132, 0, 255, 1);
+  --purple-glow: rgba(132, 0, 255, 0.2);
+  --border-color: hsl(var(--border));
+  color-scheme: light dark;
+}
+
+.magic-bento-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--purple-glow);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.global-spotlight {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  z-index: 200 !important;
+  pointer-events: none;
+}
