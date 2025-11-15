@@ -59,7 +59,6 @@ const Dashboard = () => {
       spotlightRadius={300}
       enableBorderGlow={true}
       glowColor="132, 0, 255"
-      enableTilt={true}
       enableMagnetism={true}
       clickEffect={true}
       textAutoHide={true}
