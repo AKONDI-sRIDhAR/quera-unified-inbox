@@ -10,6 +10,7 @@ import { QuickStats } from "@/components/QuickStats";
 import { NewQueryForm } from "@/components/NewQueryForm";
 import { ActiveAssignments } from "@/components/ActiveAssignments";
 import { AssignedQueries } from "@/components/AssignedQueries";
+import { SolvedAssignments } from "@/components/SolvedAssignments";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useToast } from "@/hooks/use-toast";
 import Shuffle from "@/components/Shuffle";
@@ -60,8 +61,7 @@ const Dashboard = () => {
       spotlightRadius={300}
       enableBorderGlow={true}
       glowColor="132, 0, 255"
-      enableTilt={true}
-      enableMagnetism={true}
+      enableMagnetism={false}
       clickEffect={true}
       textAutoHide={true}
     >
@@ -70,7 +70,7 @@ const Dashboard = () => {
           <div className="text-center">
             <Shuffle
               text="Quera"
-              className="text-5xl font-bold tracking-tight text-foreground font-vt323"
+              className="text-3xl font-bold tracking-tight text-foreground"
             />
             <p className="text-sm text-muted-foreground">
               Unified Query Management
@@ -100,6 +100,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             <QuickStats />
             <AssignedQueries />
+            <SolvedAssignments />
           </div>
 
           {/* Middle-Left: New Query Form (1x2 on large) */}

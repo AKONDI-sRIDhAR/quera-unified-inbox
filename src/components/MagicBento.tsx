@@ -12,6 +12,7 @@ interface MagicBentoProps {
   enableStars?: boolean;
   enableSpotlight?: boolean;
   enableBorderGlow?: boolean;
+  enableMagnetism?: boolean;
   clickEffect?: boolean;
   textAutoHide?: boolean;
   glowColor?: string;
@@ -42,6 +43,7 @@ export const MagicBento = ({
   enableStars = true,
   enableSpotlight = true,
   enableBorderGlow = true,
+  enableMagnetism = false,
   clickEffect = true,
   textAutoHide = true,
   glowColor = DEFAULT_GLOW_COLOR,
@@ -150,9 +152,17 @@ export const MagicBento = ({
     const handleMouseLeave = () => {
       isHoveredRef.current = false;
       clearAllParticles();
+
+      gsap.to(element, {
+        x: 0,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = () => {
+      // Removed magnetism effect
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -214,6 +224,7 @@ export const MagicBento = ({
     animateParticles,
     clearAllParticles,
     enableStars,
+    enableMagnetism,
     clickEffect,
     glowColor,
   ]);
