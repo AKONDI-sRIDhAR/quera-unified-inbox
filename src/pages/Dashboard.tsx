@@ -9,6 +9,8 @@ import { QueryInbox } from "@/components/QueryInbox";
 import { QuickStats } from "@/components/QuickStats";
 import { NewQueryForm } from "@/components/NewQueryForm";
 import { ActiveAssignments } from "@/components/ActiveAssignments";
+import { AssignedQueries } from "@/components/AssignedQueries";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useToast } from "@/hooks/use-toast";
 
 const Dashboard = () => {
@@ -72,15 +74,18 @@ const Dashboard = () => {
               Unified Query Management
             </p>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleLogout}
-            className="gap-2"
-          >
-            <LogOut className="h-4 w-4" />
-            Logout
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              className="gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Logout
+            </Button>
+          </div>
         </header>
 
         <div className="grid gap-4 md:gap-5 lg:grid-cols-3">
@@ -89,9 +94,10 @@ const Dashboard = () => {
             <QueryInbox />
           </div>
 
-          {/* Top-Right: Quick Stats (1x1) */}
-          <div>
+          {/* Top-Right: Quick Stats & Assigned Queries */}
+          <div className="space-y-4">
             <QuickStats />
+            <AssignedQueries />
           </div>
 
           {/* Middle-Left: New Query Form (1x2 on large) */}
