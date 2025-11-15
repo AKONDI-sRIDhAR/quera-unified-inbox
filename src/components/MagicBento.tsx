@@ -153,36 +153,16 @@ export const MagicBento = ({
       isHoveredRef.current = false;
       clearAllParticles();
 
-      if (enableMagnetism) {
-        gsap.to(element, {
-          x: 0,
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
+      gsap.to(element, {
+        x: 0,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!enableMagnetism) return;
-
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      if (enableMagnetism) {
-        const magnetX = (x - centerX) * 0.05;
-        const magnetY = (y - centerY) * 0.05;
-
-        gsap.to(element, {
-          x: magnetX,
-          y: magnetY,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
+    const handleMouseMove = () => {
+      // Removed magnetism effect
     };
 
     const handleClick = (e: MouseEvent) => {
