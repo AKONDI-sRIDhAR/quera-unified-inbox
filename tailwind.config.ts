@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         vt323: ["VT323", "monospace"],
+        pixelify: ["Pixelify Sans", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -183,9 +183,9 @@ const Shuffle = ({
         wrappersRef.current.forEach(w => {
           const strip = w.firstElementChild;
           if (!strip) return;
-          const kids = Array.from(strip.children);
+          const kids = Array.from(strip.children) as HTMLElement[];
           for (let i = 1; i < kids.length - 1; i++) {
-            kids[i].textContent = scrambleCharset.charAt(Math.floor(Math.random() * scrambleCharset.length));
+            if (kids[i]) kids[i].textContent = scrambleCharset.charAt(Math.floor(Math.random() * scrambleCharset.length));
           }
         });
       };
@@ -336,11 +336,7 @@ const Shuffle = ({
   const commonStyle = { textAlign, ...style };
   const classes = `shuffle-parent ${ready ? 'is-ready' : ''} ${className}`;
   const Tag = tag || 'p';
-  return (
-    <Tag ref={ref} className={classes} style={commonStyle}>
-      {text}
-    </Tag>
-  );
+  return React.createElement(Tag, { ref, className: classes, style: commonStyle }, text);
 };
 
 export default Shuffle;

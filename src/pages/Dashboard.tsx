@@ -66,11 +66,24 @@ const Dashboard = () => {
       textAutoHide={true}
     >
       <div className="min-h-screen bg-background p-4 pb-5">
-        <header className="mb-6 flex flex-col items-center">
+        <header className="mb-3 flex flex-col items-center">
           <div className="text-center">
             <Shuffle
               text="Quera"
-              className="text-3xl font-bold tracking-tight text-foreground"
+              className="text-5xl font-bold tracking-tight text-foreground font-pixelify"
+              shuffleDirection="right"
+              duration={0.35}
+              animationMode="evenodd"
+              shuffleTimes={1}
+              ease="power3.out"
+              stagger={0.03}
+              threshold={0.1}
+              triggerOnce={true}
+              triggerOnHover={true}
+              respectReducedMotion={true}
+              colorFrom={undefined}
+              colorTo={undefined}
+              onShuffleComplete={undefined}
             />
             <p className="text-sm text-muted-foreground">
               Unified Query Management
@@ -90,14 +103,14 @@ const Dashboard = () => {
           </Button>
         </div>
 
-        <div className="grid gap-4 md:gap-5 lg:grid-cols-3">
+        <div className="grid gap-3 md:gap-4 lg:grid-cols-3">
           {/* Top-Left: Inbox (2x1 on large screens) */}
           <div className="lg:col-span-2">
             <QueryInbox />
           </div>
 
           {/* Top-Right: Quick Stats & Assigned Queries */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <QuickStats />
             <AssignedQueries />
             <SolvedAssignments />
