@@ -99,56 +99,71 @@ export const AssignedQueries = () => {
   };
 
   return (
-    <Card className="h-full shadow-sm">
+    <Card className="shadow-sm">
       <CardHeader className="pb-4">
         <CardTitle className="text-lg font-semibold">
           My Assigned Queries
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[300px] pr-4">
-          {loading ? (
-            <div className="text-center text-muted-foreground">Loading...</div>
-          ) : queries.length === 0 ? (
-            <div className="text-center text-muted-foreground">
-              No assigned queries
+        {loading ? (
+          <div className="text-center text-muted-foreground">Loading...</div>
+        ) : queries.length === 0 ? (
+          <div className="py-8 text-center text-muted-foreground">
+            No assigned queries
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {/* Header */}
+            <div className="hidden grid-cols-12 items-center gap-4 p-2 font-semibold text-muted-foreground md:grid">
+              <div className="col-span-2">Sender</div>
+              <div className="col-span-4">Query</div>
+              <div className="col-span-2">Status</div>
+              <div className="col-span-3">Remarks</div>
+              <div className="col-span-1 text-right">Action</div>
             </div>
-          ) : (
+            {/* Rows */}
             <div className="space-y-3">
               {queries.map((query) => (
                 <div
                   key={query.id}
-                  className="flex items-start justify-between rounded-lg border border-border bg-card p-3"
+                  className="grid grid-cols-1 items-start gap-4 rounded-lg border p-3 md:grid-cols-12"
                 >
-                  <div className="flex-1 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div
-                        className={`h-2 w-2 rounded-full ${getPriorityColor(query.priority)}`}
-                      />
-                      <span className="text-sm font-medium">
-                        {query.sender}
-                      </span>
-                      <Badge variant="outline" className="text-xs capitalize">
-                        {query.category}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {query.message}
-                    </p>
+                  <div className="col-span-2 flex items-center gap-2 font-medium">
+                    <div
+                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${getPriorityColor(
+                        query.priority
+                      )}`}
+                    />
+                    {query.sender}
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleSolve(query.id)}
-                    className="ml-2 shrink-0"
-                  >
-                    <CheckCircle className="h-4 w-4" />
-                  </Button>
+                  <div className="col-span-4 text-sm text-muted-foreground">
+                    {query.message}
+                  </div>
+                  <div className="col-span-2">
+                    <Badge variant="secondary" className="capitalize">
+                      {query.status}
+                    </Badge>
+                  </div>
+                  <div className="col-span-3 text-sm text-muted-foreground italic">
+                    No remarks yet.
+                  </div>
+                  <div className="col-span-1 flex justify-end">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleSolve(query.id)}
+                      className="shrink-0"
+                    >
+                      <CheckCircle className="mr-1 h-4 w-4" />
+                      Solve
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
-          )}
-        </ScrollArea>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

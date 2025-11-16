@@ -74,7 +74,7 @@ export const QuickStats = () => {
   ];
 
   return (
-    <Card className="h-full shadow-sm">
+    <Card className="shadow-sm">
       <CardHeader className="pb-4">
         <CardTitle className="text-lg font-semibold">Quick Stats</CardTitle>
       </CardHeader>
