@@ -65,7 +65,7 @@ const Dashboard = () => {
       clickEffect={true}
       textAutoHide={true}
     >
-      <div className="min-h-screen bg-background p-4 pb-5">
+      <div className="bg-background p-4 pb-5">
         <header className="mb-3 flex flex-col items-center">
           <div className="text-center">
             <Shuffle
