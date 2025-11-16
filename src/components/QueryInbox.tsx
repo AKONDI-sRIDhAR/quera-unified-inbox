@@ -69,12 +69,12 @@ export const QueryInbox = () => {
   };
 
   return (
-    <Card className="h-full shadow-sm">
+    <Card className="shadow-sm">
       <CardHeader className="pb-4">
         <CardTitle className="text-lg font-semibold">Inbox</CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[400px] pr-4">
+        <ScrollArea className="max-h-[300px] pr-4">
           {loading ? (
             <div className="text-center text-muted-foreground">Loading...</div>
           ) : queries.length === 0 ? (

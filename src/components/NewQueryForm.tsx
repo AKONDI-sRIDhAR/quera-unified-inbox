@@ -13,6 +13,8 @@ export const NewQueryForm = () => {
   const [sender, setSender] = useState("");
   const [channel, setChannel] = useState("");
   const [message, setMessage] = useState("");
+  const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -21,37 +23,28 @@ export const NewQueryForm = () => {
     setLoading(true);
 
     try {
-      // Call edge function to tag and prioritize with AI
-      const { data: aiData, error: aiError } = await supabase.functions.invoke(
-        "tag-query",
-        {
-          body: { message },
-        }
-      );
-
-      if (aiError) throw aiError;
-
-      // Insert the query with AI-generated tags
-      const { error: insertError } = await supabase.from("queries").insert({
+      const { error } = await supabase.from("queries").insert({
         sender,
         channel,
         message,
-        category: aiData.category || "other",
-        priority: aiData.priority?.toString() || "3",
+        category,
+        priority,
         status: "open",
       });
 
-      if (insertError) throw insertError;
+      if (error) throw error;
 
       toast({
         title: "Query submitted",
-        description: `AI categorized as "${aiData.category}" with priority ${aiData.priority}`,
+        description: "Your query has been successfully submitted.",
       });
 
       // Reset form
       setSender("");
       setChannel("");
       setMessage("");
+      setCategory("");
+      setPriority("");
     } catch (error: any) {
       toast({
         title: "Error",
@@ -96,6 +89,39 @@ export const NewQueryForm = () => {
             </Select>
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="category">Category</Label>
+              <Select value={category} onValueChange={setCategory} required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="question">Question</SelectItem>
+                  <SelectItem value="request">Request</SelectItem>
+                  <SelectItem value="complaint">Complaint</SelectItem>
+                  <SelectItem value="feedback">Feedback</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="priority">Priority</Label>
+              <Select value={priority} onValueChange={setPriority} required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1">1 (Low)</SelectItem>
+                  <SelectItem value="2">2</SelectItem>
+                  <SelectItem value="3">3 (Normal)</SelectItem>
+                  <SelectItem value="4">4</SelectItem>
+                  <SelectItem value="5">5 (Urgent)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="message">Message</Label>
             <Textarea
@@ -109,14 +135,7 @@ export const NewQueryForm = () => {
           </div>
 
           <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                AI Processing...
-              </>
-            ) : (
-              "Submit Query"
-            )}
+            Submit Query
           </Button>
         </form>
       </CardContent>
