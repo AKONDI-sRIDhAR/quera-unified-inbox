@@ -65,7 +65,7 @@ const Dashboard = () => {
       clickEffect={true}
       textAutoHide={true}
     >
-      <div className="min-h-screen bg-background p-4 pb-5">
+      <div className="bg-background p-4 pb-5">
         <header className="mb-3 flex flex-col items-center">
           <div className="text-center">
             <Shuffle
@@ -103,27 +103,27 @@ const Dashboard = () => {
           </Button>
         </div>
 
-        <div className="grid gap-3 md:gap-4 lg:grid-cols-3">
-          {/* Top-Left: Inbox (2x1 on large screens) */}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {/* Row 1: Inbox and Quick Stats */}
           <div className="lg:col-span-2">
             <QueryInbox />
           </div>
-
-          {/* Top-Right: Quick Stats & Assigned Queries */}
-          <div className="space-y-3">
+          <div className="lg:col-span-1">
             <QuickStats />
-            <AssignedQueries />
-            <SolvedAssignments />
           </div>
 
-          {/* Middle-Left: New Query Form (1x2 on large) */}
+          {/* Row 2: Assigned Queries */}
+          <div className="lg:col-span-3">
+            <AssignedQueries />
+          </div>
+
+          {/* Row 3: New Query Form, Active and Solved Assignments */}
           <div className="lg:col-span-1">
             <NewQueryForm />
           </div>
-
-          {/* Middle-Right: Active Assignments (1x2) */}
-          <div className="lg:col-span-2">
+          <div className="space-y-4 lg:col-span-2">
             <ActiveAssignments />
+            <SolvedAssignments />
           </div>
         </div>
       </div>

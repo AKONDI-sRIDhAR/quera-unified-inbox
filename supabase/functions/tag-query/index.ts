@@ -76,11 +76,18 @@ Consider:
     try {
       // Remove markdown code blocks if present
       const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-      parsed = JSON.parse(cleanText);
+      const rawParsed = JSON.parse(cleanText);
+
+      // Ensure priority is a string to match the DB enum
+      parsed = {
+        ...rawParsed,
+        priority: rawParsed.priority?.toString() || '3'
+      };
+
     } catch (e) {
       console.error('Failed to parse Gemini response:', text);
       // Fallback to defaults
-      parsed = { category: 'other', priority: 3 };
+      parsed = { category: 'other', priority: '3' };
     }
 
     return new Response(
