@@ -23,14 +23,24 @@ export const NewQueryForm = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("queries").insert({
+      const insertData: {
+        sender: string;
+        channel: string;
+        message: string;
+        status: "open";
+        category?: "question" | "request" | "complaint" | "feedback" | "other";
+        priority?: "1" | "2" | "3" | "4" | "5";
+      } = {
         sender,
         channel,
         message,
-        category,
-        priority,
         status: "open",
-      });
+      };
+      
+      if (category) insertData.category = category as typeof insertData.category;
+      if (priority) insertData.priority = priority as typeof insertData.priority;
+      
+      const { error } = await supabase.from("queries").insert(insertData);
 
       if (error) throw error;
 

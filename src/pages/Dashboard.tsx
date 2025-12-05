@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { MagicBento } from "@/components/MagicBento";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
@@ -16,34 +14,22 @@ import { useToast } from "@/hooks/use-toast";
 import Shuffle from "@/components/Shuffle";
 
 const Dashboard = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) {
-        navigate("/auth");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    const loggedIn = localStorage.getItem("quera_logged_in");
+    if (loggedIn !== "true") {
+      navigate("/auth");
+    } else {
+      setIsLoggedIn(true);
+    }
   }, [navigate]);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    localStorage.removeItem("quera_logged_in");
+    localStorage.removeItem("quera_username");
     toast({
       title: "Logged out",
       description: "You've been successfully logged out.",
@@ -51,7 +37,7 @@ const Dashboard = () => {
     navigate("/auth");
   };
 
-  if (!user) return null;
+  if (!isLoggedIn) return null;
 
   return (
     <MagicBento
