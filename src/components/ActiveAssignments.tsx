@@ -60,7 +60,7 @@ export const ActiveAssignments = () => {
 
   const handleAssign = async (queryId: string) => {
     const { data: { user } } = await supabase.auth.getUser();
-    
+
     if (!user) return;
 
     const { error } = await supabase
@@ -90,7 +90,7 @@ export const ActiveAssignments = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[400px] pr-4">
+        <ScrollArea className="h-[250px] pr-4">
           {loading ? (
             <div className="text-center text-muted-foreground">Loading...</div>
           ) : queries.length === 0 ? (

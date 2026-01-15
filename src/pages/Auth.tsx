@@ -42,7 +42,7 @@ const Auth = () => {
         variant: "destructive",
       });
     }
-    
+
     setLoading(false);
   };
 
@@ -51,11 +51,7 @@ const Auth = () => {
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="w-full flex justify-center">
         <Card className="w-full max-w-md shadow-md">
           <CardHeader className="space-y-1 pb-5">
             <CardTitle className="text-2xl font-bold tracking-tight">
@@ -98,7 +94,7 @@ const Auth = () => {
             </div>
           </CardContent>
         </Card>
-      </motion.div>
+      </div>
     </div>
   );
 };

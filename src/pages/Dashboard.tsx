@@ -67,9 +67,9 @@ const Dashboard = () => {
               triggerOnce={true}
               triggerOnHover={true}
               respectReducedMotion={true}
+              onShuffleComplete={undefined}
               colorFrom={undefined}
               colorTo={undefined}
-              onShuffleComplete={undefined}
             />
             <p className="text-sm text-muted-foreground">
               Unified Query Management
@@ -103,12 +103,16 @@ const Dashboard = () => {
             <AssignedQueries />
           </div>
 
-          {/* Row 3: New Query Form, Active and Solved Assignments */}
+          {/* Row 3: New Query Form and Active Assignments */}
           <div className="lg:col-span-1">
             <NewQueryForm />
           </div>
-          <div className="space-y-4 lg:col-span-2">
+          <div className="lg:col-span-2">
             <ActiveAssignments />
+          </div>
+
+          {/* Row 4: Solved Assignments */}
+          <div className="lg:col-span-3">
             <SolvedAssignments />
           </div>
         </div>
